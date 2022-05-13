@@ -1,0 +1,41 @@
+package de.bredex.inventory.domain.spi;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "books")
+public class BookDao {
+
+    @Id
+    private Integer id;
+    
+    private String isbn;
+    private String genre;
+    private String title;
+    private String author;
+    
+    public BookDao(String isbn, String genre, String title, String author) {
+	this.isbn = isbn;
+	this.genre = genre;
+	this.title = title;
+	this.author = author;
+    }
+    
+    public String getIsbn() {
+	return isbn;
+    }
+    
+    public String getGenre() {
+	return genre;
+    }
+    
+    public String getTitle() {
+	return title;
+    }
+    
+    public String getAuthor() {
+	return author;
+    }
+}

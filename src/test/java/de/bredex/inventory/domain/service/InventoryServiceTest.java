@@ -1,0 +1,39 @@
+package de.bredex.inventory.domain.service;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.util.LinkedList;
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import de.bredex.inventory.domain.model.Book;
+import de.bredex.inventory.domain.spi.BookDao;
+import de.bredex.inventory.domain.spi.BookRepository;
+
+public class InventoryServiceTest {
+
+    private BookRepository repository = mock(BookRepository.class);
+    
+    private InventoryService service;
+    
+    @BeforeEach
+    public void setUp() {
+	service = new InventoryService(repository);
+    }
+    
+    @Test
+    public void getBooks_returns_books() {
+	List<BookDao> storedBooks = new LinkedList<>();
+	storedBooks.add(new BookDao("1-86092-022-5", "First Edition", "A Boy at Seven", "John Bidwell"));
+	storedBooks.add(new BookDao("1-86092-031-4", "Crime", "The Five Orange Pips", "Sir Arthur Conan Doyle"));
+	when(repository.findAll()).thenReturn(storedBooks);
+	
+	List<Book> books = service.getBooks();
+	
+	assertThat(books.size()).isEqualTo(2);
+    }
+}
