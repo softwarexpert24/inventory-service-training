@@ -1,13 +1,13 @@
 package de.bredex.inventory.application.api;
 
-public class BookDto {
+public final class BookResponse {
 
-    private String isbn;
-    private String genre;
-    private String title;
-    private String author;
+    private final String isbn;
+    private final String genre;
+    private final String title;
+    private final String author;
     
-    public BookDto(String isbn, String genre, String title, String author) {
+    public BookResponse(final String isbn, final String genre, final String title, final String author) {
 	this.isbn = isbn;
 	this.genre = genre;
 	this.title = title;

@@ -3,20 +3,25 @@ package de.bredex.inventory.application.api;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.bredex.inventory.domain.service.InventoryService;
 
 @RestController
-public class InventoryController {
+public final class InventoryController {
 
-    @Autowired
-    private InventoryService service;
-    
+    private final InventoryService service;
+
+    public InventoryController(final InventoryService service) {
+	this.service = service;
+    }
+
     @GetMapping("/api/v1/inventory")
-    public List<BookDto> getBooks() {
-	return service.getBooks().stream().map(book -> new BookDto(book.getIsbn(), book.getGenre(), book.getTitle(), book.getAuthor())).collect(Collectors.toList());
+    public ResponseEntity<List<BookResponse>> getBooks() {
+	return ResponseEntity.ok(service.getBooks().stream()
+		.map(book -> new BookResponse(book.getIsbn(), book.getGenre(), book.getTitle(), book.getAuthor()))
+		.collect(Collectors.toList()));
     }
 }

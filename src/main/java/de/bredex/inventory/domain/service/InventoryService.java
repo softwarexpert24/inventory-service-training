@@ -9,11 +9,11 @@ import de.bredex.inventory.domain.model.Book;
 import de.bredex.inventory.domain.spi.BookRepository;
 
 @Service
-public class InventoryService {
+public final class InventoryService {
 
-    private BookRepository repository;
+    private final BookRepository repository;
     
-    public InventoryService(BookRepository repository) {
+    public InventoryService(final BookRepository repository) {
 	this.repository = repository;
     }
     

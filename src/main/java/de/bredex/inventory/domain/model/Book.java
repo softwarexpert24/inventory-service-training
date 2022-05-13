@@ -1,31 +1,31 @@
 package de.bredex.inventory.domain.model;
 
-public class Book {
+public final class Book {
 
-    private String isbn;
-    private String genre;
-    private String title;
-    private String author;
-    
-    public Book(String isbn, String genre, String title, String author) {
+    private final String isbn;
+    private final String genre;
+    private final String title;
+    private final String author;
+
+    public Book(final String isbn, final String genre, final String title, final String author) {
 	this.isbn = isbn;
 	this.genre = genre;
 	this.title = title;
 	this.author = author;
     }
-    
+
     public String getIsbn() {
 	return isbn;
     }
-    
+
     public String getGenre() {
 	return genre;
     }
-    
+
     public String getTitle() {
 	return title;
     }
-    
+
     public String getAuthor() {
 	return author;
     }
