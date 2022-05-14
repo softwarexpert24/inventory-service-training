@@ -1,6 +1,7 @@
 package de.bredex.inventory.domain.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import de.bredex.inventory.domain.model.Book;
+import de.bredex.inventory.domain.service.InventoryService.NoSuchBookException;
 import de.bredex.inventory.domain.spi.BookEntity;
 import de.bredex.inventory.domain.spi.BookRepository;
 
@@ -47,5 +49,12 @@ public class InventoryServiceTest {
 	final Book book = service.getBook("1-86092-022-5");
 	
 	assertThat(book).isNotNull();
+    }
+    
+    @Test
+    public void getBook_throws_exception_for_non_existing_book() {
+	when(repository.findByIsbn(any())).thenReturn(Optional.empty());
+	
+	assertThrows(NoSuchBookException.class, () -> service.getBook("1-86092-022-5"));
     }
 }

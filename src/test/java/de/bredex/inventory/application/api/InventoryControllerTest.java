@@ -36,4 +36,10 @@ public class InventoryControllerTest {
 	.andExpect(jsonPath("$.title", is("The Grass is Always Greener")))
 	.andExpect(jsonPath("$.author", is("Jeffrey Archer")));
     }
+    
+    @Test
+    public void GET_returns_NOT_FOUND_for_non_existing_book() throws Exception {
+	mvc.perform(get("/api/v1/inventory/1-00000-000-0").contentType(MediaType.APPLICATION_JSON))
+	.andExpect(status().is(HttpStatus.NOT_FOUND.value()));
+    }
 }
