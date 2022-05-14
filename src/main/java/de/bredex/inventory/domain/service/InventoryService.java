@@ -17,8 +17,8 @@ public final class InventoryService {
 	this.repository = repository;
     }
     
-    public List<Book> getBooks() {
-	List<Book> books = new LinkedList<>();
+    public final List<Book> getBooks() {
+	final List<Book> books = new LinkedList<>();
 	repository.findAll().forEach(book -> books.add(new Book(book.getIsbn(), book.getGenre(), book.getTitle(), book.getAuthor())));
 	return books;
     }

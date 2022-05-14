@@ -14,19 +14,19 @@ public final class Book {
 	this.author = author;
     }
 
-    public String getIsbn() {
+    public final String getIsbn() {
 	return isbn;
     }
 
-    public String getGenre() {
+    public final String getGenre() {
 	return genre;
     }
 
-    public String getTitle() {
+    public final String getTitle() {
 	return title;
     }
 
-    public String getAuthor() {
+    public final String getAuthor() {
 	return author;
     }
 }

@@ -21,7 +21,7 @@ public class BookDao {
     
     public BookDao() {}
     
-    public BookDao(String isbn, String genre, String title, String author) {
+    public BookDao(final String isbn, final String genre, final String title, final String author) {
 	this.isbn = isbn;
 	this.genre = genre;
 	this.title = title;

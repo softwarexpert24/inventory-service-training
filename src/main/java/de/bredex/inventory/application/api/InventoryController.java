@@ -19,7 +19,7 @@ public final class InventoryController {
     }
 
     @GetMapping("/api/v1/inventory")
-    public ResponseEntity<List<BookResponse>> getBooks() {
+    public final ResponseEntity<List<BookResponse>> getBooks() {
 	return ResponseEntity.ok(service.getBooks().stream()
 		.map(book -> new BookResponse(book.getIsbn(), book.getGenre(), book.getTitle(), book.getAuthor()))
 		.collect(Collectors.toList()));
