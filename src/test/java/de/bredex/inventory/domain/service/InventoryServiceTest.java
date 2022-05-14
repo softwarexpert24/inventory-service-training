@@ -11,7 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import de.bredex.inventory.domain.model.Book;
-import de.bredex.inventory.domain.spi.BookDao;
+import de.bredex.inventory.domain.spi.BookEntity;
 import de.bredex.inventory.domain.spi.BookRepository;
 
 public class InventoryServiceTest {
@@ -27,9 +27,9 @@ public class InventoryServiceTest {
     
     @Test
     public void getBooks_returns_books() {
-	List<BookDao> storedBooks = new LinkedList<>();
-	storedBooks.add(new BookDao("1-86092-022-5", "First Edition", "A Boy at Seven", "John Bidwell"));
-	storedBooks.add(new BookDao("1-86092-031-4", "Crime", "The Five Orange Pips", "Sir Arthur Conan Doyle"));
+	List<BookEntity> storedBooks = new LinkedList<>();
+	storedBooks.add(new BookEntity("1-86092-022-5", "First Edition", "A Boy at Seven", "John Bidwell"));
+	storedBooks.add(new BookEntity("1-86092-031-4", "Crime", "The Five Orange Pips", "Sir Arthur Conan Doyle"));
 	when(repository.findAll()).thenReturn(storedBooks);
 	
 	List<Book> books = service.getBooks();

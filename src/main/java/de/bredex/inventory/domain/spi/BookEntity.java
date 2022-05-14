@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "books")
-public class BookDao {
+public class BookEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,9 +19,9 @@ public class BookDao {
     private String title;
     private String author;
     
-    public BookDao() {}
+    public BookEntity() {}
     
-    public BookDao(final String isbn, final String genre, final String title, final String author) {
+    public BookEntity(final String isbn, final String genre, final String title, final String author) {
 	this.isbn = isbn;
 	this.genre = genre;
 	this.title = title;
