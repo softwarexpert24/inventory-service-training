@@ -1,6 +1,7 @@
 package de.bredex.inventory.application.api;
 
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -25,5 +26,14 @@ public class InventoryControllerTest {
     public void GET_returns_inventory() throws Exception {
 	mvc.perform(get("/api/v1/inventory").contentType(MediaType.APPLICATION_JSON))
 		.andExpect(status().is(HttpStatus.OK.value())).andExpect(jsonPath("$.*", hasSize(10)));
+    }
+    
+    @Test
+    public void GET_returns_single_book() throws Exception {
+	mvc.perform(get("/api/v1/inventory/1-86092-049-7").contentType(MediaType.APPLICATION_JSON))
+	.andExpect(status().is(HttpStatus.OK.value())).andExpect(jsonPath("$.isbn", is("1-86092-049-7")))
+	.andExpect(jsonPath("$.genre", is("Modern Times")))
+	.andExpect(jsonPath("$.title", is("The Grass is Always Greener")))
+	.andExpect(jsonPath("$.author", is("Jeffrey Archer")));
     }
 }

@@ -1,11 +1,13 @@
 package de.bredex.inventory.domain.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,5 +37,15 @@ public class InventoryServiceTest {
 	List<Book> books = service.getBooks();
 	
 	assertThat(books.size()).isEqualTo(2);
+    }
+    
+    @Test
+    public void getBook_returns_book() {
+	final BookEntity entity = new BookEntity("1-86092-022-5", "First Edition", "A Boy at Seven", "John Bidwell");
+	when(repository.findByIsbn(any())).thenReturn(Optional.of(entity));
+	
+	final Book book = service.getBook("1-86092-022-5");
+	
+	assertThat(book).isNotNull();
     }
 }
