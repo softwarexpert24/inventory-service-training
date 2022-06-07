@@ -6,27 +6,27 @@ public final class BookResponse {
     private final String genre;
     private final String title;
     private final String author;
-    
+
     public BookResponse(final String isbn, final String genre, final String title, final String author) {
-	this.isbn = isbn;
-	this.genre = genre;
-	this.title = title;
-	this.author = author;
+        this.isbn = isbn;
+        this.genre = genre;
+        this.title = title;
+        this.author = author;
     }
-    
+
     public final String getIsbn() {
-	return isbn;
+        return isbn;
     }
-    
+
     public final String getGenre() {
-	return genre;
+        return genre;
     }
-    
+
     public final String getTitle() {
-	return title;
+        return title;
     }
-    
+
     public final String getAuthor() {
-	return author;
+        return author;
     }
 }

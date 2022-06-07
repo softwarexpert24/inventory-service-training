@@ -17,19 +17,19 @@ public final class InventoryController {
     private final InventoryService service;
 
     public InventoryController(final InventoryService service) {
-	this.service = service;
+        this.service = service;
     }
 
     @GetMapping("/api/v1/inventory")
     public final ResponseEntity<List<BookResponse>> getBooks() {
-	return ResponseEntity.ok(service.getBooks().stream()
-		.map(book -> new BookResponse(book.getIsbn(), book.getGenre(), book.getTitle(), book.getAuthor()))
-		.collect(Collectors.toList()));
+        return ResponseEntity.ok(service.getBooks().stream()
+            .map(book -> new BookResponse(book.getIsbn(), book.getGenre(), book.getTitle(), book.getAuthor()))
+            .collect(Collectors.toList()));
     }
-    
+
     @GetMapping("/api/v1/inventory/{isbn}")
     public final ResponseEntity<BookResponse> getBook(@PathVariable final String isbn) {
-	final Book book = service.getBook(isbn);
-	return ResponseEntity.ok(new BookResponse(book.getIsbn(), book.getGenre(), book.getTitle(), book.getAuthor()));
+        final Book book = service.getBook(isbn);
+        return ResponseEntity.ok(new BookResponse(book.getIsbn(), book.getGenre(), book.getTitle(), book.getAuthor()));
     }
 }

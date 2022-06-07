@@ -13,34 +13,35 @@ public class BookEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
+
     private String isbn;
     private String genre;
     private String title;
     private String author;
-    
-    public BookEntity() {}
-    
+
+    public BookEntity() {
+    }
+
     public BookEntity(final String isbn, final String genre, final String title, final String author) {
-	this.isbn = isbn;
-	this.genre = genre;
-	this.title = title;
-	this.author = author;
+        this.isbn = isbn;
+        this.genre = genre;
+        this.title = title;
+        this.author = author;
     }
-    
+
     public String getIsbn() {
-	return isbn;
+        return isbn;
     }
-    
+
     public String getGenre() {
-	return genre;
+        return genre;
     }
-    
+
     public String getTitle() {
-	return title;
+        return title;
     }
-    
+
     public String getAuthor() {
-	return author;
+        return author;
     }
 }
