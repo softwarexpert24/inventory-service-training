@@ -1,26 +1,25 @@
 package de.bredex.inventory.domain.service;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
+
+import de.bredex.inventory.domain.model.Book;
+import de.bredex.inventory.domain.service.InventoryService.NoSuchBookException;
+import de.bredex.inventory.domain.spi.BookEntity;
+import de.bredex.inventory.domain.spi.BookRepository;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+class InventoryServiceTest {
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import de.bredex.inventory.domain.model.Book;
-import de.bredex.inventory.domain.service.InventoryService.NoSuchBookException;
-import de.bredex.inventory.domain.spi.BookEntity;
-import de.bredex.inventory.domain.spi.BookRepository;
-
-public class InventoryServiceTest {
-
-    private BookRepository repository = mock(BookRepository.class);
+    private final BookRepository repository = mock(BookRepository.class);
 
     private InventoryService service;
 
@@ -30,7 +29,7 @@ public class InventoryServiceTest {
     }
 
     @Test
-    public void getBooks_returns_books() {
+    void getBooks_returns_books() {
         List<BookEntity> storedBooks = new LinkedList<>();
         storedBooks.add(new BookEntity("1-86092-022-5", "First Edition", "A Boy at Seven", "John Bidwell"));
         storedBooks.add(new BookEntity("1-86092-031-4", "Crime", "The Five Orange Pips", "Sir Arthur Conan Doyle"));
@@ -38,11 +37,11 @@ public class InventoryServiceTest {
 
         List<Book> books = service.getBooks();
 
-        assertThat(books.size()).isEqualTo(2);
+        assertThat(books).hasSize(2);
     }
 
     @Test
-    public void getBook_returns_book() {
+    void getBook_returns_book() {
         final BookEntity entity = new BookEntity("1-86092-022-5", "First Edition", "A Boy at Seven", "John Bidwell");
         when(repository.findByIsbn(any())).thenReturn(Optional.of(entity));
 
@@ -52,7 +51,7 @@ public class InventoryServiceTest {
     }
 
     @Test
-    public void getBook_throws_exception_for_non_existing_book() {
+    void getBook_throws_exception_for_non_existing_book() {
         when(repository.findByIsbn(any())).thenReturn(Optional.empty());
 
         assertThrows(NoSuchBookException.class, () -> service.getBook("1-86092-022-5"));

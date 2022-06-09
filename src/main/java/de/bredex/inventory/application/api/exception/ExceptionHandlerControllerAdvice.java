@@ -1,9 +1,5 @@
 package de.bredex.inventory.application.api.exception;
 
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -12,6 +8,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.NativeWebRequest;
 
+import de.bredex.inventory.domain.service.InventoryService.NoSuchBookException;
 import org.zalando.problem.Problem;
 import org.zalando.problem.ProblemBuilder;
 import org.zalando.problem.StatusType;
@@ -19,7 +16,9 @@ import org.zalando.problem.ThrowableProblem;
 import org.zalando.problem.spring.common.HttpStatusAdapter;
 import org.zalando.problem.spring.web.advice.ProblemHandling;
 
-import de.bredex.inventory.domain.service.InventoryService.NoSuchBookException;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @ControllerAdvice
 public class ExceptionHandlerControllerAdvice implements ProblemHandling {
